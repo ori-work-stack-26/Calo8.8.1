@@ -460,8 +460,22 @@ export class NutritionService {
           acc[date] = {
             date,
             meals: [],
+            totalCalories: 0,
+            totalProtein: 0,
+            totalCarbs: 0,
+            totalFat: 0,
+            totalFiber: 0,
+            mealCount: 0,
           };
         }
+
+        // Add to daily totals
+        acc[date].totalCalories += meal.calories || 0;
+        acc[date].totalProtein += meal.protein_g || 0;
+        acc[date].totalCarbs += meal.carbs_g || 0;
+        acc[date].totalFat += meal.fats_g || 0;
+        acc[date].totalFiber += meal.fiber_g || 0;
+        acc[date].mealCount += 1;
 
         acc[date].meals.push({
           meal_id: meal.meal_id,
